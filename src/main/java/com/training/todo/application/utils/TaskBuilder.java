@@ -2,58 +2,40 @@ package com.training.todo.application.utils;
 
 import com.training.todo.domain.Task;
 import com.training.todo.domain.label.Label;
+import com.training.todo.domain.label.LabelType;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.HashMap;
-import java.util.Vector;
 
 public class TaskBuilder {
-    private String name;
-    private String description;
-    private Date dueDate;
-    private Vector<Label> labels;
+    private final Task task;
 
-    private final HashMap<String, Label> labelsMap;
-
-    public TaskBuilder(HashMap<String, Label> labelsMap) {
-        this.labelsMap = labelsMap;
+    public TaskBuilder(HashMap<LabelType, Label> labelTypeMap){
+        this.task = Task.builder().build();
+        // a task is created as pending by default
+        task.setStatus(labelTypeMap.get(LabelType.PENDING));
     }
 
-    public void stepA(String name, String description, Date dueDate) {
-        this.name = name;
-        this.description = description;
-        this.dueDate = dueDate;
+    // this is a method for obligatory fields, it breaks open closed
+    public void setBasicData(String title, String description) {
+        task.setTitle(title);
+        task.setDescription(description);
     }
 
-    public void stepB(Vector<String> labelIds) throws Exception {
-        this.labels = handleLabel(labelIds);
+    // this is a method for obligatory fields, it breaks open closed
+    public void setDates(LocalDate startDate, LocalDate endDate) {
+        task.setStartDate(startDate);
+        task.setCreationDate(LocalDate.now());
+        task.setDueDate(endDate);
+    }
+
+    // possible bug currently it's possible to add any label so client might bypass
+    // business statuses
+    public void stepB(Label label) {
+        task.setStatus(label);
     }
 
     public Task build() {
-        return Task.builder()
-                .id(UUIDGenerator.generateUUID())
-                .title(name)
-                .description(description)
-                .labels(labels)
-                .dueDate(dueDate)
-                .build();
-    }
-
-    private Vector<Label> handleLabel(Vector<String> labels) throws Exception {
-        Vector<Label> list = new Vector<>();
-
-        if (labels.isEmpty()) {
-            return list;
-        }
-
-        for (String label : labels) {
-            if (!this.labelsMap.containsKey(label)) {
-                throw new Exception(String.format("Label %s not found", label));
-            } else {
-                list.add(this.labelsMap.get(label));
-            }
-        }
-
-        return list;
+        return task;
     }
 }

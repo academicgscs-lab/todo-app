@@ -3,19 +3,21 @@ package com.training.todo.domain;
 import com.training.todo.domain.label.Label;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
-import java.util.Date;
-import java.util.Vector;
+import java.time.LocalDate;
 
 @Builder
+@Getter
+@Setter
 public class Task {
-    @Getter
     private String id;
     private String title;
     private String description;
 
-    private Vector<Label> labels;
+    private Label status;
 
-    private Date dueDate;
-    private Date startDate;
+    private LocalDate creationDate;
+    private LocalDate dueDate;
+    private LocalDate startDate;
 }
