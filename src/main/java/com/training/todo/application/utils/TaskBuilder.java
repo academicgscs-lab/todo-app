@@ -29,12 +29,6 @@ public class TaskBuilder {
         task.setDueDate(endDate);
     }
 
-    // possible bug currently it's possible to add any label so client might bypass
-    // business statuses
-    public void stepB(Label label) {
-        task.setStatus(label);
-    }
-
     public Task build() {
         return task;
     }

@@ -4,17 +4,16 @@ import com.training.todo.application.exceptions.InvalidTaskException;
 import com.training.todo.application.utils.TaskBuilder;
 import com.training.todo.application.validation.ITaskValidation;
 import com.training.todo.application.validation.creation.DateTaskValidation;
-import com.training.todo.application.validation.creation.ObligatoryFieldsTaskValidation;
+import com.training.todo.domain.Task;
 import com.training.todo.domain.label.Label;
 import com.training.todo.domain.label.LabelType;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
-import java.util.Date;
+import java.util.HashMap;
 import java.util.Vector;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 class TaskManagerTest {
 
@@ -25,21 +24,11 @@ class TaskManagerTest {
         return labelManager;
     }
 
-    @Test
-    void testAddTask() {
-        LabelManager labelManager = new LabelManager();
-        Label pending = labelManager.addLabel("Pending", "Hasn't been started", LabelType.PENDING);
-        labelManager.addLabel("Completed", "Finished", LabelType.COMPLETED);
-        TaskManager taskManager = new TaskManager(labelManager.getLabelTypeMap(), new Vector<>());
-
-        TaskBuilder taskBuilder = new TaskBuilder(labelManager.getLabelTypeMap());
-
-        taskBuilder.stepB(pending);
-        try {
-            taskManager.addTask(taskBuilder.build());
-        } catch (InvalidTaskException e) {
-            fail(e.getMessage());
-        }
+    private static Task getTask(HashMap<LabelType, Label> labels) {
+        TaskBuilder builder = new TaskBuilder(labels);
+        builder.setBasicData("Todo", "Cool description");
+        builder.setDates(LocalDate.now(), LocalDate.now().plusDays(5));
+        return builder.build();
     }
 
     @Test
@@ -98,5 +87,19 @@ class TaskManagerTest {
         } catch (Exception e) {
             fail(e.getMessage());
         }
+    }
+
+    @Test
+    void setTaskStatus_changeToStatus_noExceptions() {
+        LabelManager labelManager = getLabelManager();
+        Task task = getTask(labelManager.getLabelTypeMap());
+        TaskManager taskManager = new TaskManager(labelManager.getLabelTypeMap(), new Vector<>());
+        try {
+            taskManager.addTask(task);
+        } catch (InvalidTaskException e) {
+            fail(e.getMessage());
+        }
+
+        taskManager.setStatus(task, LabelType.COMPLETED);
     }
 }
