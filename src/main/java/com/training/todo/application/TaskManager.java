@@ -1,6 +1,6 @@
-package com.training.tomcatdemosample.application;
+package com.training.todo.application;
 
-import com.training.tomcatdemosample.domain.Task;
+import com.training.todo.domain.Task;
 import lombok.Getter;
 
 import java.util.HashMap;

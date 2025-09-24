@@ -1,4 +1,4 @@
-package com.training.tomcatdemosample.application.utils;
+package com.training.todo.application.utils;
 
 import java.util.UUID;
 

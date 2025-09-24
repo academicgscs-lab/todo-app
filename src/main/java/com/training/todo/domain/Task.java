@@ -1,6 +1,6 @@
-package com.training.tomcatdemosample.domain;
+package com.training.todo.domain;
 
-import com.training.tomcatdemosample.domain.label.Label;
+import com.training.todo.domain.label.Label;
 import lombok.Builder;
 import lombok.Getter;
 

@@ -1,6 +1,6 @@
-import com.training.tomcatdemosample.application.LabelManager;
-import com.training.tomcatdemosample.application.TaskManager;
-import com.training.tomcatdemosample.application.utils.TaskBuilder;
+import com.training.todo.application.LabelManager;
+import com.training.todo.application.TaskManager;
+import com.training.todo.application.utils.TaskBuilder;
 import org.junit.jupiter.api.Test;
 
 import java.util.Date;

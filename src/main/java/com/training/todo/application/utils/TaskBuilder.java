@@ -1,7 +1,7 @@
-package com.training.tomcatdemosample.application.utils;
+package com.training.todo.application.utils;
 
-import com.training.tomcatdemosample.domain.Task;
-import com.training.tomcatdemosample.domain.label.Label;
+import com.training.todo.domain.Task;
+import com.training.todo.domain.label.Label;
 
 import java.util.Date;
 import java.util.HashMap;

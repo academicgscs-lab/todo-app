@@ -1,7 +1,7 @@
-package com.training.tomcatdemosample.application;
+package com.training.todo.application;
 
-import com.training.tomcatdemosample.application.utils.UUIDGenerator;
-import com.training.tomcatdemosample.domain.label.Label;
+import com.training.todo.application.utils.UUIDGenerator;
+import com.training.todo.domain.label.Label;
 import lombok.Getter;
 
 import java.util.HashMap;
