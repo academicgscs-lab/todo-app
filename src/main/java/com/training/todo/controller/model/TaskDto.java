@@ -1,11 +1,12 @@
 package com.training.todo.controller.model;
 
-import com.training.todo.domain.Task;
+import lombok.Builder;
 import lombok.Getter;
 
 import java.time.LocalDate;
 
 @Getter
+@Builder
 public class TaskDto {
 
     private String id;
@@ -17,14 +18,4 @@ public class TaskDto {
     private LocalDate dueDate;
     private LocalDate startDate;
 
-    public static TaskDto mapToDto(Task task) {
-        TaskDto dto = new TaskDto();
-        dto.id = task.getId();
-        dto.title = task.getTitle();
-        dto.description = task.getDescription();
-        dto.status = task.getStatus().getName();
-        dto.dueDate = task.getDueDate();
-        dto.startDate = task.getStartDate();
-        return dto;
-    }
 }

@@ -5,8 +5,6 @@ import com.training.todo.application.TaskManager;
 import com.training.todo.application.validation.ITaskValidation;
 import com.training.todo.application.validation.creation.DateTaskValidation;
 import com.training.todo.application.validation.creation.ObligatoryFieldsTaskValidation;
-import com.training.todo.domain.Task;
-import com.training.todo.domain.label.Label;
 import com.training.todo.infrastructure.persistence.helpers.LabelPersistenceHelper;
 import com.training.todo.infrastructure.persistence.helpers.TaskPersistenceHelper;
 import jakarta.servlet.ServletContext;
@@ -14,8 +12,6 @@ import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
 import jakarta.servlet.annotation.WebListener;
 
-import java.util.Collection;
-import java.util.Optional;
 import java.util.Vector;
 
 @WebListener
