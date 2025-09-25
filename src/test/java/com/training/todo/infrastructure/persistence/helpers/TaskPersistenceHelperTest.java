@@ -13,7 +13,7 @@ import java.util.Vector;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class XTaskHelperTest {
+class TaskPersistenceHelperTest {
 
     private static LabelManager getLabelManager() {
         LabelManager labelManager = new LabelManager();
@@ -34,31 +34,31 @@ class XTaskHelperTest {
     }
 
     @Test
-    void marshall_storesObjects_Passes() {
+    void write_storesObjects_Passes() {
         String home = String.format("%s/%s", System.getProperty("user.dir"), "persistence");
         LabelManager labelManager = getLabelManager();
-        XTaskHelper helper = new XTaskHelper(home, labelManager);
+        TaskPersistenceHelper helper = new TaskPersistenceHelper(home, labelManager);
 
         Vector<Task> taskList = new Vector<>();
         for (int i = 0; i < 2; i++) {
             taskList.add(getTask(labelManager.getLabelTypeMap().get(LabelType.PENDING)));
         }
 
-        helper.marshall(taskList);
+        helper.write(taskList);
     }
 
     @Test
     void unmarshall_loadsATask_Passes() {
         String home = String.format("%s/%s", System.getProperty("user.dir"), "persistence");
         LabelManager labelManager = getLabelManager();
-        XTaskHelper helper = new XTaskHelper(home, labelManager);
+        TaskPersistenceHelper helper = new TaskPersistenceHelper(home, labelManager);
 
         Task controlTask = getTask(labelManager.getLabelTypeMap().get(LabelType.PENDING));
         Vector<Task> list = new Vector<>();
         list.add(controlTask);
-        helper.marshall(list);
+        helper.write(list);
 
-        Optional<Vector<Task>> result = helper.load();
+        Optional<Vector<Task>> result = helper.read();
         assertFalse(result.isEmpty());
         Vector<Task> taskList = result.get();
         assertFalse(taskList.isEmpty());

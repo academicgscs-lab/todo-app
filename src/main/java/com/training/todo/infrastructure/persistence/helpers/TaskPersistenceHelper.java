@@ -11,20 +11,17 @@ import java.nio.file.Path;
 import java.util.Optional;
 import java.util.Vector;
 
-public class XTaskHelper implements ILoader<Task>, IMarshaller<Task> {
+public class TaskPersistenceHelper extends PersistenceHelper<Task, XTask> {
 
-    private final XmlFacade<XTask> xml;
-    private final String homePath;
     private final LabelManager labelManager;
 
-    public XTaskHelper(String homePath, LabelManager labelManager) {
-        this.homePath = homePath;
+    public TaskPersistenceHelper(String homePath, LabelManager labelManager) {
+        super(homePath, new XmlFacade<>(XTask.class));
         this.labelManager = labelManager;
-        xml = new XmlFacade<>(XTask.class);
     }
 
     @Override
-    public Optional<Vector<Task>> load() {
+    public Optional<Vector<Task>> read() {
         Optional<Vector<Path>> optionPaths = FileManager.listFiles(String.format("%s/%s", homePath, XTask.HOME));
         if (optionPaths.isEmpty()) {
             return Optional.empty();
@@ -44,10 +41,10 @@ public class XTaskHelper implements ILoader<Task>, IMarshaller<Task> {
     }
 
     @Override
-    public boolean marshall(Vector<Task> task) {
-        for (Task t : task) {
+    public boolean write(Vector<Task> items) {
+        for (Task item : items) {
             try {
-                xml.marshall(XTask.mapToXTask(t), FileManager.createFile(homePath, XTask.HOME, t.getId()));
+                xml.marshall(XTask.mapToXTask(item), FileManager.createFile(homePath, XTask.HOME, item.getId()));
             } catch (JAXBException e) {
                 System.out.println(e.getMessage());
             }
