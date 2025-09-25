@@ -24,7 +24,7 @@ public class TaskService {
         return TaskDto.mapToDto(taskManager.getTask(id));
     }
 
-    public void updateTask(TaskDto taskDto) {
+    public void updateTask(TaskDto taskDto) throws InvalidTaskException {
         taskManager.updateTask(mapToEntity(taskDto));
     }
 

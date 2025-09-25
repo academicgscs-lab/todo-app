@@ -49,7 +49,7 @@ public class EditTaskServlet extends HttpServlet {
         try {
             taskService.updateTask(dto);
             resp.sendRedirect(req.getContextPath());
-        } catch (Exception e) {
+        } catch (InvalidTaskException e) {
             req.setAttribute("errorMessage", e.getMessage());
             req.getRequestDispatcher("/editTaskForm.jsp").forward(req, resp);
         }

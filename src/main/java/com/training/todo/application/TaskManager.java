@@ -1,34 +1,40 @@
 package com.training.todo.application;
 
 import com.training.todo.application.exceptions.InvalidTaskException;
-import com.training.todo.application.validation.ITaskValidation;
+import com.training.todo.application.utils.UUIDGenerator;
+import com.training.todo.application.validation.task.TaskCreationValidator;
+import com.training.todo.application.validation.task.TaskUpdateValidator;
 import com.training.todo.domain.Task;
 import com.training.todo.domain.label.LabelType;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Vector;
+import java.util.*;
 
 // TODO: use repository pattern for domain entities
 public class TaskManager {
     private final HashMap<String, Task> taskMap;
-    private final Vector<ITaskValidation> creationTaskValidation;
+    private final TaskCreationValidator taskCreationValidator;
+    private final TaskUpdateValidator taskUpdateValidator;
     private final LabelManager labelManager;
 
-    public TaskManager(LabelManager labelManager, Vector<ITaskValidation> creationTaskValidation) {
-        this.creationTaskValidation = creationTaskValidation;
+    public TaskManager(LabelManager labelManager) {
+        taskCreationValidator = new TaskCreationValidator();
+        taskUpdateValidator = new TaskUpdateValidator();
         this.labelManager = labelManager;
         this.taskMap = new HashMap<>();
     }
 
     public void createTask(Task task) throws InvalidTaskException {
-        for (ITaskValidation taskValidation : creationTaskValidation) {
-            if (taskValidation.check(task)) {
-                throw new InvalidTaskException("Invalid Task");
-            }
-        }
+        Optional<List<String>> validation = taskCreationValidator.isValid(task);
 
-        taskMap.put(task.getId(), task);
+        if (validation.isEmpty()){
+            String id = UUIDGenerator.generateUUID();
+            task.setId(id);
+            taskMap.put(task.getId(), task);
+        }else {
+            StringBuilder messageBuilder = new StringBuilder();
+            validation.get().forEach(m -> messageBuilder.append(m).append("\n"));
+            throw new InvalidTaskException(messageBuilder.toString());
+        }
     }
 
     public void appendTasks(Collection<Task> taskList) {
@@ -41,6 +47,18 @@ public class TaskManager {
 
     public Task getTask(String id) {
         return taskMap.get(id);
+    }
+
+    // implement validations
+    public void updateTask(Task task) throws  InvalidTaskException {
+        Optional<List<String>> validation = taskUpdateValidator.isValid(task);
+        if (validation.isEmpty()){
+            taskMap.put(task.getId(), task);
+        }else {
+            StringBuilder messageBuilder = new StringBuilder();
+            validation.get().forEach(m -> messageBuilder.append(m).append("\n"));
+            throw new InvalidTaskException(messageBuilder.toString());
+        }
     }
 
     public Collection<Task> getValues(){
