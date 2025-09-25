@@ -53,11 +53,11 @@
     <div class="todo-card">
         <h3><%= task.getTitle() %></h3>
         <p><strong>Description:</strong> <%= task.getDescription() %></p>
-        <p><strong>Status:</strong> <%= task.getStatus() %></p>
+        <p><strong>Status:</strong> <%= task.getLabelDto().getName() %></p>
         <p><strong>Start Date:</strong> <%= task.getStartDate() %></p>
         <p><strong>Target Date:</strong> <%= task.getDueDate() %></p>
 
-        <form action="edit" method="post">
+        <form action="TodoList/edit" method="get">
             <input type="hidden" name="id" value="<%= task.getId() %>">
             <button type="submit">Edit</button>
         </form>

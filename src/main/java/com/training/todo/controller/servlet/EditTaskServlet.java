@@ -18,8 +18,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
 
-@WebServlet("/TodoList/new")
-public class NewTaskServlet extends HttpServlet {
+@WebServlet("/TodoList/edit")
+public class EditTaskServlet extends HttpServlet {
+
     private TaskService taskService;
     private LabelService labelService;
 
@@ -37,18 +38,20 @@ public class NewTaskServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("labelList", labelService.getLabels());
-        req.getRequestDispatcher("/createTaskForm.jsp").forward(req, resp);
+        String id = req.getParameter("id");
+        req.setAttribute("taskDto", taskService.getTask(id));
+        req.getRequestDispatcher("/editTaskForm.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         TaskDto dto = mapToDto(req);
         try {
-            taskService.createTask(dto);
+            taskService.updateTask(dto);
             resp.sendRedirect(req.getContextPath());
-        } catch (InvalidTaskException e) {
+        } catch (Exception e) {
             req.setAttribute("errorMessage", e.getMessage());
-            req.getRequestDispatcher("/createTaskForm.jsp").forward(req, resp);
+            req.getRequestDispatcher("/editTaskForm.jsp").forward(req, resp);
         }
     }
 

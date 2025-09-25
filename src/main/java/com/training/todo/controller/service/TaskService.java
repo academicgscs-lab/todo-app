@@ -9,12 +9,10 @@ import com.training.todo.domain.Task;
 
 public class TaskService {
     private final TaskManager taskManager;
-    private final LabelManager labelManager;
     private final TaskBuilder taskBuilder;
 
     public TaskService(TaskManager taskManager, LabelManager labelManager) {
         this.taskManager = taskManager;
-        this.labelManager = labelManager;
         taskBuilder = new TaskBuilder(labelManager);
     }
 
@@ -22,16 +20,14 @@ public class TaskService {
         taskManager.createTask(mapToEntity(taskDto));
     }
 
-    public static TaskDto mapToDto(Task task) {
-        return TaskDto.builder()
-                .id(task.getId())
-                .title(task.getTitle())
-                .description(task.getDescription())
-                .status(task.getStatus().getName())
-                .dueDate(task.getDueDate())
-                .startDate(task.getStartDate())
-                .build();
+    public TaskDto getTask(String id)  {
+        return TaskDto.mapToDto(taskManager.getTask(id));
     }
+
+    public void updateTask(TaskDto taskDto) {
+        taskManager.updateTask(mapToEntity(taskDto));
+    }
+
 
     public Task mapToEntity(TaskDto task) {
         taskBuilder.setBasicData(task.getTitle(), task.getDescription());

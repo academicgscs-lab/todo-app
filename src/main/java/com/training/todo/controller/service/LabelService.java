@@ -17,6 +17,10 @@ public class LabelService {
         return labelManager.getLabels().stream().map(LabelService::mapToDto).toList();
     }
 
+    public LabelDto getLabel(String id){
+        return mapToDto(labelManager.getLabel(id));
+    }
+
     public static LabelDto mapToDto(Label label){
         return LabelDto.builder()
                 .id(label.getId())
