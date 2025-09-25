@@ -3,14 +3,13 @@ package com.training.todo.application;
 import com.training.todo.application.utils.UUIDGenerator;
 import com.training.todo.domain.label.Label;
 import com.training.todo.domain.label.LabelType;
-import lombok.Getter;
 
+import java.util.Collection;
 import java.util.HashMap;
 
+// TODO: use repository for CRUD operations
 public class LabelManager {
-    @Getter
     private final HashMap<String, Label> labelIdMap;
-    @Getter
     private final HashMap<LabelType, Label> labelTypeMap;
 
     public LabelManager() {
@@ -28,5 +27,27 @@ public class LabelManager {
         labelIdMap.put(label.getId(), label);
         labelTypeMap.put(label.getType(), label);
         return label;
+    }
+
+    public void addLabel(Label label) {
+        labelIdMap.put(label.getId(), label);
+        labelTypeMap.put(label.getType(), label);
+    }
+
+    public Label getLabel(String id) {
+        return  labelIdMap.get(id);
+    }
+
+    public Label getLabel(LabelType type) {
+        return  labelTypeMap.get(type);
+    }
+
+    public Collection<Label> getLabels() {
+        return labelIdMap.values();
+    }
+
+    public void appendLabelCollection(Collection<Label> labels) {
+        labels.forEach(label -> labelIdMap.put(label.getId(), label));
+        labels.forEach(label -> labelTypeMap.put(label.getType(), label));
     }
 }

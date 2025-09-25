@@ -8,6 +8,8 @@ import com.training.todo.infrastructure.persistence.utils.XmlFacade;
 import jakarta.xml.bind.JAXBException;
 
 import java.nio.file.Path;
+import java.text.CollationElementIterator;
+import java.util.Collection;
 import java.util.Optional;
 import java.util.Vector;
 
@@ -21,7 +23,7 @@ public class TaskPersistenceHelper extends PersistenceHelper<Task, XTask> {
     }
 
     @Override
-    public Optional<Vector<Task>> read() {
+    public Optional<Collection<Task>> read() {
         Optional<Vector<Path>> optionPaths = FileManager.listFiles(String.format("%s/%s", homePath, XTask.HOME));
         if (optionPaths.isEmpty()) {
             return Optional.empty();
@@ -30,7 +32,7 @@ public class TaskPersistenceHelper extends PersistenceHelper<Task, XTask> {
         Vector<Task> taskList = new Vector<>();
         for (Path path : optionPaths.get()) {
             try {
-                Task task = XTask.mapFromXTask(xml.unmarshal(path), labelManager);
+                Task task = XTask.mapToTask(xml.unmarshal(path), labelManager);
                 taskList.add(task);
             } catch (JAXBException e) {
                 System.out.println(e.getMessage());
@@ -41,7 +43,7 @@ public class TaskPersistenceHelper extends PersistenceHelper<Task, XTask> {
     }
 
     @Override
-    public boolean write(Vector<Task> items) {
+    public boolean write(Collection<Task> items) {
         for (Task item : items) {
             try {
                 xml.marshall(XTask.mapToXTask(item), FileManager.createFile(homePath, XTask.HOME, item.getId()));

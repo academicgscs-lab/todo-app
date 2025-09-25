@@ -41,7 +41,7 @@ public class XTask {
         return xTask;
     }
 
-    public static Task mapFromXTask(XTask xTask, LabelManager labelManager) {
+    public static Task mapToTask(XTask xTask, LabelManager labelManager) {
         return Task.builder()
                 .id(xTask.getId())
                 .title(xTask.getTitle())
@@ -49,7 +49,7 @@ public class XTask {
                 .dueDate(LocalDate.ofEpochDay(xTask.getDueDateEpochDay()))
                 .startDate(LocalDate.ofEpochDay(xTask.getStartDateEpochDay()))
                 .creationDate(LocalDate.ofEpochDay(xTask.getCreationDateEpochDay()))
-                .status(labelManager.getLabelIdMap().get(xTask.getStatusId()))
+                .status(labelManager.getLabel(xTask.getStatusId()))
                 .build();
     }
 }

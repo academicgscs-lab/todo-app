@@ -2,23 +2,23 @@ package com.training.todo.infrastructure.persistence.helpers;
 
 import com.training.todo.domain.label.Label;
 import com.training.todo.infrastructure.persistence.model.XLabel;
-import com.training.todo.infrastructure.persistence.model.XTask;
 import com.training.todo.infrastructure.persistence.utils.FileManager;
 import com.training.todo.infrastructure.persistence.utils.XmlFacade;
 import jakarta.xml.bind.JAXBException;
 
 import java.nio.file.Path;
+import java.util.Collection;
 import java.util.Optional;
 import java.util.Vector;
 
 public class LabelPersistenceHelper extends PersistenceHelper<Label, XLabel> {
 
-    protected LabelPersistenceHelper(String homePath) {
+    public LabelPersistenceHelper(String homePath) {
         super(homePath, new XmlFacade<>(XLabel.class));
     }
 
     @Override
-    public Optional<Vector<Label>> read() {
+    public Optional<Collection<Label>> read() {
         Optional<Vector<Path>> optionPaths = FileManager.listFiles(String.format("%s/%s", homePath, XLabel.HOME));
         if (optionPaths.isEmpty()) {
             return Optional.empty();
@@ -38,7 +38,7 @@ public class LabelPersistenceHelper extends PersistenceHelper<Label, XLabel> {
     }
 
     @Override
-    public boolean write(Vector<Label> list) {
+    public boolean write(Collection<Label> list) {
         for (Label item : list) {
             try {
                 xml.marshall(XLabel.mapToXLabel(item), FileManager.createFile(homePath, XLabel.HOME, item.getId()));

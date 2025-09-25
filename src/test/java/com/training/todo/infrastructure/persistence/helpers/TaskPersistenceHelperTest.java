@@ -8,6 +8,7 @@ import com.training.todo.domain.label.LabelType;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.Optional;
 import java.util.Vector;
 
@@ -17,6 +18,7 @@ class TaskPersistenceHelperTest {
 
     private static LabelManager getLabelManager() {
         LabelManager labelManager = new LabelManager();
+        labelManager.addLabel("Complete", "Hasn't been started", LabelType.COMPLETED);
         labelManager.addLabel("Pending", "Hasn't been started", LabelType.PENDING);
         return labelManager;
     }
@@ -36,12 +38,15 @@ class TaskPersistenceHelperTest {
     @Test
     void write_storesObjects_Passes() {
         String home = String.format("%s/%s", System.getProperty("user.dir"), "persistence");
-        LabelManager labelManager = getLabelManager();
+        LabelPersistenceHelper labelPersistenceHelper = new LabelPersistenceHelper(home);
+        LabelManager labelManager = new  LabelManager();
+        labelPersistenceHelper.read().ifPresent(labelManager::appendLabelCollection);
+
         TaskPersistenceHelper helper = new TaskPersistenceHelper(home, labelManager);
 
         Vector<Task> taskList = new Vector<>();
-        for (int i = 0; i < 2; i++) {
-            taskList.add(getTask(labelManager.getLabelTypeMap().get(LabelType.PENDING)));
+        for (int i = 0; i < 5; i++) {
+            taskList.add(getTask(labelManager.getLabel(LabelType.PENDING)));
         }
 
         helper.write(taskList);
@@ -53,14 +58,14 @@ class TaskPersistenceHelperTest {
         LabelManager labelManager = getLabelManager();
         TaskPersistenceHelper helper = new TaskPersistenceHelper(home, labelManager);
 
-        Task controlTask = getTask(labelManager.getLabelTypeMap().get(LabelType.PENDING));
+        Task controlTask = getTask(labelManager.getLabel(LabelType.PENDING));
         Vector<Task> list = new Vector<>();
         list.add(controlTask);
         helper.write(list);
 
-        Optional<Vector<Task>> result = helper.read();
+        Optional<Collection<Task>> result = helper.read();
         assertFalse(result.isEmpty());
-        Vector<Task> taskList = result.get();
+        Collection<Task> taskList = result.get();
         assertFalse(taskList.isEmpty());
 
         boolean success = false;

@@ -1,7 +1,7 @@
 package com.training.todo.infrastructure.persistence.helpers;
 
-import java.util.Vector;
+import java.util.Collection;
 
 public interface IMarshaller<T> {
-    boolean write(Vector<T> list);
+    boolean write(Collection<T> list);
 }

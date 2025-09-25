@@ -5,12 +5,10 @@ import com.training.todo.application.utils.TaskBuilder;
 import com.training.todo.application.validation.ITaskValidation;
 import com.training.todo.application.validation.creation.DateTaskValidation;
 import com.training.todo.domain.Task;
-import com.training.todo.domain.label.Label;
 import com.training.todo.domain.label.LabelType;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
-import java.util.HashMap;
 import java.util.Vector;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -24,27 +22,27 @@ class TaskManagerTest {
         return labelManager;
     }
 
-    private static Task getTask(HashMap<LabelType, Label> labels) {
-        TaskBuilder builder = new TaskBuilder(labels);
+    private static Task getTask(LabelManager labelManager) {
+        TaskBuilder builder = new TaskBuilder(labelManager);
         builder.setBasicData("Todo", "Cool description");
         builder.setDates(LocalDate.now(), LocalDate.now().plusDays(5));
         return builder.build();
     }
 
     @Test
-    void addTask_invalidDates_throwsException() {
+    void createTask_invalidDates_throwsException() {
         LabelManager labelManager = new LabelManager();
         Vector<ITaskValidation> creationalTaskValidations = new Vector<>();
         creationalTaskValidations.add(new DateTaskValidation());
-        TaskManager manager = new TaskManager(labelManager.getLabelTypeMap(), creationalTaskValidations);
+        TaskManager manager = new TaskManager(labelManager, creationalTaskValidations);
 
-        TaskBuilder taskBuilder = new TaskBuilder(labelManager.getLabelTypeMap());
+        TaskBuilder taskBuilder = new TaskBuilder(labelManager);
         taskBuilder.setBasicData("Task", "A task");
 
         LocalDate now = LocalDate.now();
         taskBuilder.setDates(now, now);
         try {
-            manager.addTask(taskBuilder.build());
+            manager.createTask(taskBuilder.build());
         } catch (InvalidTaskException e) {
             assertTrue(true);
         } catch (Exception e) {
@@ -54,34 +52,34 @@ class TaskManagerTest {
     }
 
     @Test
-    void addTask_validDates_noExceptions() {
+    void createTask_validDates_noExceptions() {
         LabelManager labelManager = new LabelManager();
         Vector<ITaskValidation> creationalTaskValidations = new Vector<>();
         creationalTaskValidations.add(new DateTaskValidation());
-        TaskManager manager = new TaskManager(labelManager.getLabelTypeMap(), creationalTaskValidations);
+        TaskManager manager = new TaskManager(labelManager, creationalTaskValidations);
 
-        TaskBuilder taskBuilder = new TaskBuilder(labelManager.getLabelTypeMap());
+        TaskBuilder taskBuilder = new TaskBuilder(labelManager);
         taskBuilder.setBasicData("Task", "A task");
         LocalDate now = LocalDate.now();
         LocalDate inTwoWeeks = now.plusWeeks(2);
         taskBuilder.setDates(now, inTwoWeeks);
         try {
-            manager.addTask(taskBuilder.build());
+            manager.createTask(taskBuilder.build());
         } catch (Exception e) {
             fail(e.getMessage());
         }
     }
 
     @Test
-    void addTask_nullValues_throwsException() {
+    void createTask_nullValues_throwsException() {
         LabelManager labelManager = new LabelManager();
         Vector<ITaskValidation> creationalTaskValidations = new Vector<>();
         creationalTaskValidations.add(new DateTaskValidation());
-        TaskManager manager = new TaskManager(labelManager.getLabelTypeMap(), creationalTaskValidations);
+        TaskManager manager = new TaskManager(labelManager, creationalTaskValidations);
 
-        TaskBuilder taskBuilder = new TaskBuilder(labelManager.getLabelTypeMap());
+        TaskBuilder taskBuilder = new TaskBuilder(labelManager);
         try {
-            manager.addTask(taskBuilder.build());
+            manager.createTask(taskBuilder.build());
         } catch (InvalidTaskException e) {
             assertTrue(true, e.getMessage());
         } catch (Exception e) {
@@ -92,10 +90,10 @@ class TaskManagerTest {
     @Test
     void setTaskStatus_changeToStatus_noExceptions() {
         LabelManager labelManager = getLabelManager();
-        Task task = getTask(labelManager.getLabelTypeMap());
-        TaskManager taskManager = new TaskManager(labelManager.getLabelTypeMap(), new Vector<>());
+        Task task = getTask(labelManager);
+        TaskManager taskManager = new TaskManager(labelManager, new Vector<>());
         try {
-            taskManager.addTask(task);
+            taskManager.createTask(task);
         } catch (InvalidTaskException e) {
             fail(e.getMessage());
         }
