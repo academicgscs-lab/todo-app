@@ -35,7 +35,7 @@ public class NewTaskServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("labelList", labelService.getLabels());
-        req.getRequestDispatcher("/createTaskForm.jsp").forward(req, resp);
+        req.getRequestDispatcher("/todoForm/form.jsp").forward(req, resp);
     }
 
     @Override
@@ -49,8 +49,8 @@ public class NewTaskServlet extends HttpServlet {
             attempt++;
             req.setAttribute("errorMessage", String.format("Attempt(%d)\n%s",  attempt, e.getMessage()));
             req.setAttribute("labelList", labelService.getLabels());
-            req.setAttribute("task", dto);
-            req.getRequestDispatcher("/createTaskForm.jsp").forward(req, resp);
+            req.setAttribute("taskDto", dto);
+            req.getRequestDispatcher("/todoForm/form.jsp").forward(req, resp);
         }
     }
 

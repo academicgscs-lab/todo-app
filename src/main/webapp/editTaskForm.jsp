@@ -6,7 +6,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>TodoApp</title>
+    <title>Todo App</title>
     <link rel="stylesheet" type="text/css" href="../css/form.css">
 </head>
 
