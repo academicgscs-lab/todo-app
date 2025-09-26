@@ -28,10 +28,8 @@ public class NewTaskServlet extends HttpServlet {
         super.init(config);
 
         ServletContext context = getServletContext();
-        TaskManager taskManager = (TaskManager) context.getAttribute("taskManager");
-        LabelManager labelManager = (LabelManager) context.getAttribute("labelManager");
-        labelService = new LabelService(labelManager);
-        taskService = new TaskService(taskManager, labelManager);
+        labelService = (LabelService) context.getAttribute("labelService");
+        taskService = (TaskService) context.getAttribute("taskService");
     }
 
     @Override

@@ -61,6 +61,12 @@ public class TaskManager {
         }
     }
 
+    public void deleteTask(String id) throws InvalidTaskException {
+        if (taskMap.remove(id) == null){
+            throw new InvalidTaskException(String.format("Task with id %s not found", id));
+        }
+    }
+
     public Collection<Task> getValues(){
         return taskMap.values();
     }

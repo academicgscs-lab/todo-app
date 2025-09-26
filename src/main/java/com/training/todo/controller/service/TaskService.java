@@ -7,6 +7,8 @@ import com.training.todo.application.utils.TaskBuilder;
 import com.training.todo.controller.model.TaskDto;
 import com.training.todo.domain.Task;
 
+import java.util.List;
+
 public class TaskService {
     private final TaskManager taskManager;
     private final TaskBuilder taskBuilder;
@@ -24,8 +26,12 @@ public class TaskService {
         taskManager.createTask(taskBuilder.build());
     }
 
-    public TaskDto getTask(String id)  {
+    public TaskDto getTask(String id) {
         return TaskDto.mapToDto(taskManager.getTask(id));
+    }
+
+    public List<TaskDto> getTasks() {
+        return taskManager.getValues().stream().map(TaskDto::mapToDto).toList();
     }
 
     public void updateTask(TaskDto taskDto) throws InvalidTaskException {
@@ -37,5 +43,9 @@ public class TaskService {
         task.setStartDate(taskDto.getStartDate());
         task.setDueDate(taskDto.getDueDate());
         taskManager.updateTask(task);
+    }
+
+    public void deleteTask(String taskId) throws InvalidTaskException {
+        taskManager.deleteTask(taskId);
     }
 }

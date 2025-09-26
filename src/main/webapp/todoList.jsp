@@ -36,6 +36,20 @@
         .add-button:hover {
             background-color: #218838;
         }
+        .btn {
+            padding: 8px 16px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .btn-danger {
+            background-color: #dc3545;
+            color: white;
+        }
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
     </style>
 </head>
 <body>
@@ -62,17 +76,14 @@
             <button type="submit">Edit</button>
         </form>
 
-        <form action="delete" method="post">
-            <input type="hidden" name="id" value="<%= task.getId() %>">
-            <button type="submit">Delete</button>
-        </form>
+        <a href="TodoList?action=delete&id=<%= task.getId() %>" class="btn btn-danger">Delete</a>
 
     </div>
     <%
         } // End of for loop
     } else {
     %>
-    <p>No movies available at the moment.</p>
+    <p>NO AVAILABLE TODOs</p>
     <%
         } // End of if-else
     %>

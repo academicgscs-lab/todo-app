@@ -6,7 +6,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>TodoApp<</title>
+    <title>TodoApp</title>
     <style>
         body {
             font-family: Arial, sans-serif;

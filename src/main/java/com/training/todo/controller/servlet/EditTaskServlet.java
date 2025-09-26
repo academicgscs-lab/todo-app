@@ -1,7 +1,5 @@
 package com.training.todo.controller.servlet;
 
-import com.training.todo.application.LabelManager;
-import com.training.todo.application.TaskManager;
 import com.training.todo.application.exceptions.InvalidTaskException;
 import com.training.todo.controller.model.LabelDto;
 import com.training.todo.controller.model.TaskDto;
@@ -29,10 +27,8 @@ public class EditTaskServlet extends HttpServlet {
         super.init(config);
 
         ServletContext context = getServletContext();
-        TaskManager taskManager = (TaskManager) context.getAttribute("taskManager");
-        LabelManager labelManager = (LabelManager) context.getAttribute("labelManager");
-        labelService = new LabelService(labelManager);
-        taskService = new TaskService(taskManager, labelManager);
+        labelService = (LabelService) context.getAttribute("labelService");
+        taskService = (TaskService) context.getAttribute("taskService");
     }
 
     @Override

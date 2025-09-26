@@ -2,6 +2,8 @@ package com.training.todo;
 
 import com.training.todo.application.LabelManager;
 import com.training.todo.application.TaskManager;
+import com.training.todo.controller.service.LabelService;
+import com.training.todo.controller.service.TaskService;
 import com.training.todo.infrastructure.persistence.helpers.LabelPersistenceHelper;
 import com.training.todo.infrastructure.persistence.helpers.TaskPersistenceHelper;
 import jakarta.servlet.ServletContext;
@@ -29,14 +31,13 @@ public class AppDataInitializer implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
         ServletContext context = sce.getServletContext();
         LabelManager labelManager = new LabelManager();
-
         TaskManager taskManager = new TaskManager(labelManager);
 
         loadLabels(labelManager);
         loadTasks(taskManager, labelManager);
 
-        context.setAttribute("labelManager", labelManager);
-        context.setAttribute("taskManager", taskManager);
+        context.setAttribute("labelService", new LabelService(labelManager));
+        context.setAttribute("taskService", new TaskService(taskManager, labelManager));
 
     }
 }
