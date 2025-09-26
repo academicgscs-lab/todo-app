@@ -7,48 +7,10 @@
 <head>
     <meta charset="UTF-8">
     <title>TodoApp</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-
-        .form-container {
-            max-width: 500px;
-            margin: auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-        }
-
-        .form-container input[type="text"], .form-container input[type="date"] {
-            width: 90%;
-            padding: 10px;
-            margin: 8px 0;
-            display: inline-block;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        .form-container button {
-            background-color: #28a745;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 100%;
-        }
-
-        .form-container button:hover {
-            background-color: #218838;
-        }
-
-        .error-message {
-            color: red;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="../css/form.css">
 </head>
+
+<jsp:include page="header.jsp"></jsp:include>
 <body>
 <div class="form-container">
     <h1>Edit TODO</h1>

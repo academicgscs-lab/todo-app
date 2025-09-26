@@ -4,74 +4,9 @@
 <html>
 <head>
     <title>Confirm Delete</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: rgba(0,0,0,0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-        .modal {
-            background-color: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-            max-width: 500px;
-            width: 90%;
-        }
-        .modal h2 {
-            color: #dc3545;
-            margin-top: 0;
-        }
-        .task-info {
-            background-color: #f8f9fa;
-            padding: 15px;
-            border-radius: 4px;
-            margin: 20px 0;
-        }
-        .task-info p {
-            margin: 5px 0;
-        }
-        .btn {
-            padding: 10px 20px;
-            margin: 0 10px;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-        }
-        .btn-danger {
-            background-color: #dc3545;
-            color: white;
-        }
-        .btn-danger:hover {
-            background-color: #c82333;
-        }
-        .btn-secondary {
-            background-color: #6c757d;
-            color: white;
-        }
-        .btn-secondary:hover {
-            background-color: #545b62;
-        }
-        .button-group {
-            text-align: center;
-            margin-top: 20px;
-        }
-        .warning-icon {
-            color: #dc3545;
-            font-size: 48px;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="../css/modal.css">
 </head>
+
 <body>
 <div class="modal">
     <div class="warning-icon">⚠️</div>

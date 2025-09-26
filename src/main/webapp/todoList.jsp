@@ -5,56 +5,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Todo App</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        .task-list { display: flex; flex-wrap: wrap; gap: 20px; }
-        .todo-card { border: 1px solid #ccc; border-radius: 8px; padding: 15px; width: 250px; box-shadow: 2px 2px 8px rgba(0,0,0,0.1); }
-        .todo-card h3 { margin-top: 0; }
-        .todo-card p { margin: 5px 0; }
-        .todo-card form { margin-top: 10px; }
-        .todo-card button {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .todo-card button:hover {
-            background-color: #0056b3;
-        }
-
-        .add-button {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #28a745;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-        }
-        .add-button:hover {
-            background-color: #218838;
-        }
-        .btn {
-            padding: 8px 16px;
-            text-decoration: none;
-            border-radius: 4px;
-            font-size: 14px;
-            cursor: pointer;
-        }
-        .btn-danger {
-            background-color: #dc3545;
-            color: white;
-        }
-        .btn-danger:hover {
-            background-color: #c82333;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
+<jsp:include page="header.jsp"></jsp:include>
+
 <div>
-    <h1>Todo App</h1>
     <a href="TodoList/new" class="add-button">Add +</a>
 </div>
 
