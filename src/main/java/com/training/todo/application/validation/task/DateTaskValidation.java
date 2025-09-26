@@ -8,11 +8,7 @@ import java.util.Optional;
 import java.util.Vector;
 
 public class DateTaskValidation implements IValidator {
-    private final List<String> errorMessages;
-
-    public DateTaskValidation() {
-        this.errorMessages = new Vector<>();
-    }
+    private List<String> errorMessages;
 
     public void checkNullFields(Task task) {
         if (task.getCreationDate() == null) {
@@ -28,22 +24,20 @@ public class DateTaskValidation implements IValidator {
         }
     }
 
-    private void checkCreationDate(Task task) {
-        if (task.getStartDate().isBefore(task.getCreationDate())) {
-            errorMessages.add("startDate class field can't be before creation date");
-        }
+    private void checkDueDate(Task task) {
         if (task.getDueDate().isBefore(task.getStartDate())) {
-            errorMessages.add("dueDate class field can't be before creation date");
+            errorMessages.add("Target date can't be before Start date");
         }
     }
 
     @Override
     public Optional<List<String>> isValid(Task task) {
+        errorMessages = new Vector<>();
         checkNullFields(task);
         if (!errorMessages.isEmpty()) {
             return Optional.of(errorMessages);
         }
-        checkCreationDate(task);
+        checkDueDate(task);
         if (errorMessages.isEmpty()) {
             return Optional.empty();
         }else  {
