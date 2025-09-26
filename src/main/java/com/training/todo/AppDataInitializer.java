@@ -2,8 +2,8 @@ package com.training.todo;
 
 import com.training.todo.application.LabelManager;
 import com.training.todo.application.TaskManager;
-import com.training.todo.controller.service.LabelService;
-import com.training.todo.controller.service.TaskService;
+import com.training.todo.infrastructure.controller.service.LabelService;
+import com.training.todo.infrastructure.controller.service.TaskService;
 import com.training.todo.infrastructure.persistence.helpers.LabelPersistenceHelper;
 import com.training.todo.infrastructure.persistence.helpers.TaskPersistenceHelper;
 import jakarta.servlet.ServletContext;

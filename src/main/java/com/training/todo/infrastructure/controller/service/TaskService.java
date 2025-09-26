@@ -1,10 +1,10 @@
-package com.training.todo.controller.service;
+package com.training.todo.infrastructure.controller.service;
 
 import com.training.todo.application.LabelManager;
 import com.training.todo.application.TaskManager;
 import com.training.todo.application.exceptions.InvalidTaskException;
 import com.training.todo.application.utils.TaskBuilder;
-import com.training.todo.controller.model.TaskDto;
+import com.training.todo.infrastructure.controller.model.TaskDto;
 import com.training.todo.domain.Task;
 
 import java.util.List;

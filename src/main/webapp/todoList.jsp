@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.util.List, com.training.todo.controller.model.TaskDto" %>
+<%@ page import="java.util.List, com.training.todo.infrastructure.controller.model.TaskDto" %>
 <!DOCTYPE html>
 <html>
 <head>

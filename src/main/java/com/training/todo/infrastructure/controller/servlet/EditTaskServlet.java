@@ -1,10 +1,10 @@
-package com.training.todo.controller.servlet;
+package com.training.todo.infrastructure.controller.servlet;
 
 import com.training.todo.application.exceptions.InvalidTaskException;
-import com.training.todo.controller.model.LabelDto;
-import com.training.todo.controller.model.TaskDto;
-import com.training.todo.controller.service.LabelService;
-import com.training.todo.controller.service.TaskService;
+import com.training.todo.infrastructure.controller.model.LabelDto;
+import com.training.todo.infrastructure.controller.model.TaskDto;
+import com.training.todo.infrastructure.controller.service.LabelService;
+import com.training.todo.infrastructure.controller.service.TaskService;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;

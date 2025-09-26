@@ -1,6 +1,6 @@
 <%@ page import="java.util.Collection" %>
-<%@ page import="com.training.todo.controller.model.LabelDto" %>
-<%@ page import="com.training.todo.controller.model.TaskDto" %>
+<%@ page import="com.training.todo.infrastructure.controller.model.LabelDto" %>
+<%@ page import="com.training.todo.infrastructure.controller.model.TaskDto" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>

@@ -1,5 +1,5 @@
-<%@ page import="com.training.todo.controller.model.TaskDto" %>
-<%@ page import="com.training.todo.controller.model.LabelDto" %>
+<%@ page import="com.training.todo.infrastructure.controller.model.TaskDto" %>
+<%@ page import="com.training.todo.infrastructure.controller.model.LabelDto" %>
 <%@ page import="java.util.Collection" %>
 <%
     TaskDto taskDto = (TaskDto) request.getAttribute("taskDto");

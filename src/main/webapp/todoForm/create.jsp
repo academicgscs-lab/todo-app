@@ -1,4 +1,4 @@
-<%@ page import="com.training.todo.controller.model.LabelDto" %>
+<%@ page import="com.training.todo.infrastructure.controller.model.LabelDto" %>
 <%@ page import="java.util.Collection" %>
 <form action="new" method="post">
     <label for="title"><b>Title:</b></label>

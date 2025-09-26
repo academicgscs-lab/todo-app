@@ -1,4 +1,4 @@
-package com.training.todo.controller.model;
+package com.training.todo.infrastructure.controller.model;
 
 import com.training.todo.domain.label.Label;
 import lombok.Builder;

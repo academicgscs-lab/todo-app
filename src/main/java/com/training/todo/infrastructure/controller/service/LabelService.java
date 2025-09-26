@@ -1,7 +1,7 @@
-package com.training.todo.controller.service;
+package com.training.todo.infrastructure.controller.service;
 
 import com.training.todo.application.LabelManager;
-import com.training.todo.controller.model.LabelDto;
+import com.training.todo.infrastructure.controller.model.LabelDto;
 import com.training.todo.domain.label.Label;
 
 import java.util.Collection;
