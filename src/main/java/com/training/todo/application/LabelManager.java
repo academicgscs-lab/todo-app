@@ -29,11 +29,6 @@ public class LabelManager {
         return label;
     }
 
-    public void addLabel(Label label) {
-        labelIdMap.put(label.getId(), label);
-        labelTypeMap.put(label.getType(), label);
-    }
-
     public Label getLabel(String id) {
         return  labelIdMap.get(id);
     }

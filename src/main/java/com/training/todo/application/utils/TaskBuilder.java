@@ -2,11 +2,9 @@ package com.training.todo.application.utils;
 
 import com.training.todo.application.LabelManager;
 import com.training.todo.domain.Task;
-import com.training.todo.domain.label.Label;
 import com.training.todo.domain.label.LabelType;
 
 import java.time.LocalDate;
-import java.util.HashMap;
 
 public class TaskBuilder {
     private final Task task;
