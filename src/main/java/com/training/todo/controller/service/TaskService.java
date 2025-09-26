@@ -10,14 +10,18 @@ import com.training.todo.domain.Task;
 public class TaskService {
     private final TaskManager taskManager;
     private final TaskBuilder taskBuilder;
+    private final LabelManager labelManager;
 
     public TaskService(TaskManager taskManager, LabelManager labelManager) {
         this.taskManager = taskManager;
         taskBuilder = new TaskBuilder(labelManager);
+        this.labelManager = labelManager;
     }
 
     public void createTask(TaskDto taskDto) throws InvalidTaskException {
-        taskManager.createTask(mapToEntity(taskDto));
+        taskBuilder.setBasicData(taskDto.getTitle(), taskDto.getDescription());
+        taskBuilder.setDates(taskDto.getStartDate(), taskDto.getDueDate());
+        taskManager.createTask(taskBuilder.build());
     }
 
     public TaskDto getTask(String id)  {
@@ -25,13 +29,13 @@ public class TaskService {
     }
 
     public void updateTask(TaskDto taskDto) throws InvalidTaskException {
-        taskManager.updateTask(mapToEntity(taskDto));
-    }
-
-
-    public Task mapToEntity(TaskDto task) {
-        taskBuilder.setBasicData(task.getTitle(), task.getDescription());
-        taskBuilder.setDates(task.getStartDate(), task.getDueDate());
-        return taskBuilder.build();
+        String taskId = taskDto.getId();
+        Task task = taskManager.getTask(taskId);
+        task.setDescription(taskDto.getDescription());
+        task.setTitle(taskDto.getTitle());
+        task.setStatus(labelManager.getLabel(taskDto.getLabelDto().getId()));
+        task.setStartDate(taskDto.getStartDate());
+        task.setDueDate(taskDto.getDueDate());
+        taskManager.updateTask(task);
     }
 }

@@ -67,6 +67,8 @@
     %>
 
     <form action="edit" method="post">
+        <input type="hidden" name="id" value="<%= taskDto.getId() %>">
+
         <label for="title"><b>Title:</b></label>
         <input type="text" id="title" name="title" value="<%= taskDto.getTitle() %>" required>
 
@@ -101,7 +103,7 @@
     <%
     } else {
     %>
-    <p> 404 not found.</p>
+    <p> Task not found not found.</p>
     <%
         }
     %>

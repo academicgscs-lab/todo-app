@@ -30,10 +30,10 @@ public class DateTaskValidation implements IValidator {
 
     private void checkCreationDate(Task task) {
         if (task.getStartDate().isBefore(task.getCreationDate())) {
-            errorMessages.add("startDate class field can't be before creation date%n");
+            errorMessages.add("startDate class field can't be before creation date");
         }
         if (task.getDueDate().isBefore(task.getStartDate())) {
-            errorMessages.add("dueDate class field can't be before creation date%n");
+            errorMessages.add("dueDate class field can't be before creation date");
         }
     }
 
