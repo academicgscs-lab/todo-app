@@ -21,6 +21,7 @@ public class EditTaskServlet extends HttpServlet {
 
     private TaskService taskService;
     private LabelService labelService;
+    private int attempt;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -29,6 +30,7 @@ public class EditTaskServlet extends HttpServlet {
         ServletContext context = getServletContext();
         labelService = (LabelService) context.getAttribute("labelService");
         taskService = (TaskService) context.getAttribute("taskService");
+        attempt = 0;
     }
 
     @Override
@@ -44,9 +46,13 @@ public class EditTaskServlet extends HttpServlet {
         TaskDto dto = mapToDto(req);
         try {
             taskService.updateTask(dto);
-            resp.sendRedirect(req.getContextPath());
+            resp.sendRedirect("/TodoList");
+            attempt = 0;
         } catch (InvalidTaskException e) {
-            req.setAttribute("errorMessage", e.getMessage());
+            attempt++;
+            req.setAttribute("errorMessage", String.format("Attempt(%d)\n%s",  attempt, e.getMessage()));
+            req.setAttribute("labelList", labelService.getLabels());
+            req.setAttribute("taskDto", dto);
             req.getRequestDispatcher("/editTaskForm.jsp").forward(req, resp);
         }
     }

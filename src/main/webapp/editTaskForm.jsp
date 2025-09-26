@@ -103,7 +103,7 @@
     <%
     } else {
     %>
-    <p> Task not found not found.</p>
+    <p> Task not found.</p>
     <%
         }
     %>

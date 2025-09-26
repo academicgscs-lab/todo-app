@@ -9,11 +9,10 @@ import java.util.Vector;
 
 public class TaskUpdateValidator implements IValidator {
     private final List<IValidator> validators;
-    private final List<String> errorMessages;
+    private List<String> errorMessages;
 
     public TaskUpdateValidator() {
-        this.validators = new Vector<>();
-        this.errorMessages = new Vector<>();
+        validators = new Vector<>();
         validators.add(new DateTaskValidation());
         validators.add(new ObligatoryFieldsTaskValidation());
     }
@@ -28,6 +27,7 @@ public class TaskUpdateValidator implements IValidator {
 
     @Override
     public Optional<List<String>> isValid(Task task) {
+        errorMessages = new Vector<>();
         checkId(task);
         if (!errorMessages.isEmpty()){
             return Optional.of(errorMessages);

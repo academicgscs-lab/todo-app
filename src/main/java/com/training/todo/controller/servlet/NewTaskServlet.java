@@ -1,7 +1,5 @@
 package com.training.todo.controller.servlet;
 
-import com.training.todo.application.LabelManager;
-import com.training.todo.application.TaskManager;
 import com.training.todo.application.exceptions.InvalidTaskException;
 import com.training.todo.controller.model.LabelDto;
 import com.training.todo.controller.model.TaskDto;
@@ -22,11 +20,13 @@ import java.time.LocalDate;
 public class NewTaskServlet extends HttpServlet {
     private TaskService taskService;
     private LabelService labelService;
+    private int attempt;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
 
+        attempt = 0;
         ServletContext context = getServletContext();
         labelService = (LabelService) context.getAttribute("labelService");
         taskService = (TaskService) context.getAttribute("taskService");
@@ -43,9 +43,13 @@ public class NewTaskServlet extends HttpServlet {
         TaskDto dto = mapToDto(req);
         try {
             taskService.createTask(dto);
-            resp.sendRedirect(req.getContextPath());
+            resp.sendRedirect("/TodoList");
+            attempt = 0;
         } catch (InvalidTaskException e) {
-            req.setAttribute("errorMessage", e.getMessage());
+            attempt++;
+            req.setAttribute("errorMessage", String.format("Attempt(%d)\n%s",  attempt, e.getMessage()));
+            req.setAttribute("labelList", labelService.getLabels());
+            req.setAttribute("task", dto);
             req.getRequestDispatcher("/createTaskForm.jsp").forward(req, resp);
         }
     }

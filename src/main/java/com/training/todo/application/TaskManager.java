@@ -9,7 +9,6 @@ import com.training.todo.domain.label.LabelType;
 
 import java.util.*;
 
-// TODO: use repository pattern for domain entities
 public class TaskManager {
     private final HashMap<String, Task> taskMap;
     private final TaskCreationValidator taskCreationValidator;
@@ -26,11 +25,11 @@ public class TaskManager {
     public void createTask(Task task) throws InvalidTaskException {
         Optional<List<String>> validation = taskCreationValidator.isValid(task);
 
-        if (validation.isEmpty()){
+        if (validation.isEmpty()) {
             String id = UUIDGenerator.generateUUID();
             task.setId(id);
             taskMap.put(task.getId(), task);
-        }else {
+        } else {
             StringBuilder messageBuilder = new StringBuilder();
             validation.get().forEach(m -> messageBuilder.append(m).append("\n"));
             throw new InvalidTaskException(messageBuilder.toString());
@@ -49,12 +48,11 @@ public class TaskManager {
         return taskMap.get(id);
     }
 
-    // implement validations
-    public void updateTask(Task task) throws  InvalidTaskException {
+    public void updateTask(Task task) throws InvalidTaskException {
         Optional<List<String>> validation = taskUpdateValidator.isValid(task);
-        if (validation.isEmpty()){
+        if (validation.isEmpty()) {
             taskMap.put(task.getId(), task);
-        }else {
+        } else {
             StringBuilder messageBuilder = new StringBuilder();
             validation.get().forEach(m -> messageBuilder.append(m).append("\n"));
             throw new InvalidTaskException(messageBuilder.toString());
@@ -62,12 +60,12 @@ public class TaskManager {
     }
 
     public void deleteTask(String id) throws InvalidTaskException {
-        if (taskMap.remove(id) == null){
+        if (taskMap.remove(id) == null) {
             throw new InvalidTaskException(String.format("Task with id %s not found", id));
         }
     }
 
-    public Collection<Task> getValues(){
+    public Collection<Task> getValues() {
         return taskMap.values();
     }
 }
