@@ -1,6 +1,5 @@
-package com.training.todo.domain;
+package com.training.todo.core.domain;
 
-import com.training.todo.domain.label.Label;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;

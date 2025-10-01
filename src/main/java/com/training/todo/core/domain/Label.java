@@ -1,17 +1,16 @@
-package com.training.todo.domain.label;
+package com.training.todo.core.domain;
 
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
-// is this the best strategy?
 @Builder
 @Getter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Label {
     @EqualsAndHashCode.Include
     private String id;
-    private String name;
+    private String title;
     private String description;
     private LabelType type;
 }

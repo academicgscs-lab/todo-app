@@ -1,4 +1,4 @@
-package com.training.todo.application.utils;
+package com.training.todo.core.usecases.utils;
 
 import java.util.UUID;
 

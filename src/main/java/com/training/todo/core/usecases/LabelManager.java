@@ -1,13 +1,13 @@
-package com.training.todo.application;
+package com.training.todo.core.usecases;
 
-import com.training.todo.application.utils.UUIDGenerator;
-import com.training.todo.domain.label.Label;
-import com.training.todo.domain.label.LabelType;
+import com.training.todo.core.usecases.utils.UUIDGenerator;
+import com.training.todo.core.domain.Label;
+import com.training.todo.core.domain.LabelType;
 
 import java.util.Collection;
 import java.util.HashMap;
 
-// TODO: use repository for CRUD operations
+@Deprecated
 public class LabelManager {
     private final HashMap<String, Label> labelIdMap;
     private final HashMap<LabelType, Label> labelTypeMap;
@@ -20,7 +20,7 @@ public class LabelManager {
     public Label addLabel(String name, String description, LabelType type) {
         Label label = Label.builder().
                 id(UUIDGenerator.generateUUID())
-                .name(name)
+                .title(name)
                 .description(description)
                 .type(type)
                 .build();

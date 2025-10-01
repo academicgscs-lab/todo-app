@@ -1,8 +1,8 @@
-package com.training.todo.application.utils;
+package com.training.todo.core.usecases.utils;
 
-import com.training.todo.application.LabelManager;
-import com.training.todo.domain.Task;
-import com.training.todo.domain.label.LabelType;
+import com.training.todo.core.usecases.LabelManager;
+import com.training.todo.core.domain.Task;
+import com.training.todo.core.domain.LabelType;
 
 import java.time.LocalDate;
 

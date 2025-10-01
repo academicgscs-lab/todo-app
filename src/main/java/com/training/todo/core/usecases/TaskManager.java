@@ -1,14 +1,18 @@
-package com.training.todo.application;
+package com.training.todo.core.usecases;
 
-import com.training.todo.application.exceptions.InvalidTaskException;
-import com.training.todo.application.utils.UUIDGenerator;
-import com.training.todo.application.validation.task.TaskCreationValidator;
-import com.training.todo.application.validation.task.TaskUpdateValidator;
-import com.training.todo.domain.Task;
-import com.training.todo.domain.label.LabelType;
+import com.training.todo.core.usecases.exceptions.InvalidTaskException;
+import com.training.todo.core.usecases.utils.UUIDGenerator;
+import com.training.todo.core.domain.validation.task.TaskCreationValidator;
+import com.training.todo.core.domain.validation.task.TaskUpdateValidator;
+import com.training.todo.core.domain.Task;
+import com.training.todo.core.domain.LabelType;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Optional;
 
+@Deprecated
 public class TaskManager {
     private final HashMap<String, Task> taskMap;
     private final TaskCreationValidator taskCreationValidator;

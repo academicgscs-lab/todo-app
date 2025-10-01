@@ -1,4 +1,4 @@
-package com.training.todo.domain.label;
+package com.training.todo.core.domain;
 
 public enum LabelType {
     PENDING,

@@ -1,6 +1,6 @@
-package com.training.todo.application.validation;
+package com.training.todo.core.domain.validation;
 
-import com.training.todo.domain.Task;
+import com.training.todo.core.domain.Task;
 
 import java.util.List;
 import java.util.Optional;
