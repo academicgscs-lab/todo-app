@@ -35,6 +35,11 @@ public class XmlLabelRepository implements ILabelRepository {
         return Optional.empty();
     }
 
+    @Override
+    public List<DBLabel> searchAll() throws DBException {
+        return List.of();
+    }
+
     private List<Path> readPaths() throws DBException {
         List<Path> files;
         try {
