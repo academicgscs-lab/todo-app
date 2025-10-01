@@ -10,7 +10,7 @@ import lombok.Setter;
 
 @Getter
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement(name = "label")
+@XmlRootElement(name = "labelList")
 @NoArgsConstructor
 public class XLabel {
     private String id;

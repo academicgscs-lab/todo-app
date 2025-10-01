@@ -1,6 +1,6 @@
 package com.training.todo.infrastructure.controller.servlet;
 
-import com.training.todo.application.exceptions.InvalidTaskException;
+import com.training.todo.core.usecases.exceptions.InvalidTaskException;
 import com.training.todo.infrastructure.controller.model.TaskDto;
 import com.training.todo.infrastructure.controller.service.TaskService;
 import jakarta.servlet.RequestDispatcher;
@@ -13,16 +13,19 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet("/TodoList")
 public class TaskServlet extends HttpServlet {
     private TaskService taskService;
+    private List<List<TaskDto>> taskList;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         ServletContext context = getServletContext();
         taskService = (TaskService) context.getAttribute("taskService");
+        taskList = taskService.getTaskListSegmented();
     }
 
     @Override

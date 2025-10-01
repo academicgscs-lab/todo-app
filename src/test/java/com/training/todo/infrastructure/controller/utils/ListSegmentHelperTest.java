@@ -1,6 +1,6 @@
 package com.training.todo.infrastructure.controller.utils;
 
-import com.training.todo.domain.Task;
+import com.training.todo.core.domain.Task;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;

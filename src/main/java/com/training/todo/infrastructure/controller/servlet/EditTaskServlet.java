@@ -1,6 +1,6 @@
 package com.training.todo.infrastructure.controller.servlet;
 
-import com.training.todo.application.exceptions.InvalidTaskException;
+import com.training.todo.core.usecases.exceptions.InvalidTaskException;
 import com.training.todo.infrastructure.controller.model.LabelDto;
 import com.training.todo.infrastructure.controller.model.TaskDto;
 import com.training.todo.infrastructure.controller.service.LabelService;

@@ -1,8 +1,8 @@
 package com.training.todo.infrastructure.controller.service;
 
-import com.training.todo.application.LabelManager;
+import com.training.todo.core.usecases.LabelManager;
 import com.training.todo.infrastructure.controller.model.LabelDto;
-import com.training.todo.domain.label.Label;
+import com.training.todo.core.domain.Label;
 
 import java.util.Collection;
 
@@ -24,7 +24,7 @@ public class LabelService {
     public static LabelDto mapToDto(Label label){
         return LabelDto.builder()
                 .id(label.getId())
-                .name(label.getName())
+                .title(label.getTitle())
                 .description(label.getDescription())
                 .build();
     }

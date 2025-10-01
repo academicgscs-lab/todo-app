@@ -1,6 +1,6 @@
 package com.training.todo.infrastructure.controller.model;
 
-import com.training.todo.domain.Task;
+import com.training.todo.core.domain.Task;
 import lombok.Builder;
 import lombok.Getter;
 
