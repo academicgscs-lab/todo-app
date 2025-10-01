@@ -1,4 +1,4 @@
-package com.training.todo.infrastructure.persistence.utils;
+package com.training.todo.infrastructure.data_providers.xml_data_provider.utils;
 
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
