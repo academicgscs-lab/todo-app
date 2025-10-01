@@ -23,7 +23,7 @@
     <div class="todo-card">
         <h3><%= task.getTitle() %></h3>
         <p><strong>Description:</strong> <%= task.getDescription() %></p>
-        <p><strong>Status:</strong> <%= task.getLabelDto().getName() %></p>
+        <p><strong>Status:</strong> <%= task.getLabelDto().getTitle() %></p>
         <p><strong>Start Date:</strong> <%= task.getStartDate() %></p>
         <p><strong>Target Date:</strong> <%= task.getDueDate() %></p>
 

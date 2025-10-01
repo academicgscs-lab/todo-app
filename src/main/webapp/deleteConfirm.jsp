@@ -29,10 +29,10 @@
     <div class="task-info">
         <p><strong>Title:</strong> <%= task.getTitle() %></p>
         <p><strong>Description:</strong> <%= task.getDescription() %></p>
-        <p><strong>Status:</strong> <%= task.getLabelDto().getName() %></p>
+        <p><strong>Status:</strong> <%= task.getLabelDto().getTitle() %></p>
         <p><strong>Start Date:</strong> <%= task.getStartDate() %></p>
         <p><strong>Target Date:</strong> <%= task.getDueDate() %></p>
-        <p><strong>Status:</strong> <%= task.getLabelDto().getName() %></p>
+        <p><strong>Status:</strong> <%= task.getLabelDto().getTitle() %></p>
     </div>
 
     <div class="button-group">

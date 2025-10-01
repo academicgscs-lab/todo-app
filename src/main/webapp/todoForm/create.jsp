@@ -1,11 +1,20 @@
 <%@ page import="com.training.todo.infrastructure.controller.model.LabelDto" %>
 <%@ page import="java.util.Collection" %>
-<form action="new" method="post">
+<%@ page import="com.training.todo.infrastructure.controller.model.TaskDto" %>
+
+<%
+    TaskDto taskDto = (TaskDto) request.getAttribute("taskDto");
+%>
+
+<form action="<%=request.getAttribute("action")%>" method="post">
     <label for="title"><b>Title:</b></label>
     <input type="text" id="title" name="title" required>
 
     <label for="description"><b>Description:</b></label>
-    <input type="text" id="description" name="description" required>
+    <input
+            type="text" id="description" name="description" required
+            value="<%= taskDto == null? "" : taskDto.getDescription() %>"
+    >
 
     <label for="startDate"><b>Start date:</b></label>
     <input type="date" id="startDate" name="startDate" required>
@@ -21,7 +30,7 @@
                 for (LabelDto item : labelList) {
         %>
         <option
-                value="<%= item.getId() %>"><%= item.getName() %>
+                value="<%= item.getId() %>"><%= item.getTitle() %>
         </option>
         <%
                 } // end for

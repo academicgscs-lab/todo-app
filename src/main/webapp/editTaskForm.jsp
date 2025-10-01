@@ -52,7 +52,7 @@
                         String selected = (item.getId().equals(taskDto.getLabelDto().getId())) ? "selected" : "";
             %>
             <option
-                    value="<%= item.getId() %>" <%= selected %>><%= item.getName() %>
+                    value="<%= item.getId() %>" <%= selected %>><%= item.getTitle() %>
             </option>
             <%
                     } // end for
