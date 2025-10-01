@@ -1,9 +1,11 @@
 package com.training.todo.application;
 
-import com.training.todo.application.exceptions.InvalidTaskException;
-import com.training.todo.application.utils.TaskBuilder;
-import com.training.todo.domain.Task;
-import com.training.todo.domain.label.LabelType;
+import com.training.todo.core.usecases.LabelManager;
+import com.training.todo.core.usecases.TaskManager;
+import com.training.todo.core.usecases.exceptions.InvalidTaskException;
+import com.training.todo.core.usecases.utils.TaskBuilder;
+import com.training.todo.core.domain.Task;
+import com.training.todo.core.domain.LabelType;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;

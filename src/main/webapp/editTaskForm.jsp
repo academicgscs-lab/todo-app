@@ -1,54 +1,16 @@
 <%@ page import="java.util.Collection" %>
-<%@ page import="com.training.todo.controller.model.LabelDto" %>
-<%@ page import="com.training.todo.controller.model.TaskDto" %>
+<%@ page import="com.training.todo.infrastructure.controller.model.LabelDto" %>
+<%@ page import="com.training.todo.infrastructure.controller.model.TaskDto" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>TodoApp</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-
-        .form-container {
-            max-width: 500px;
-            margin: auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-        }
-
-        .form-container input[type="text"], .form-container input[type="date"] {
-            width: 90%;
-            padding: 10px;
-            margin: 8px 0;
-            display: inline-block;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        .form-container button {
-            background-color: #28a745;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 100%;
-        }
-
-        .form-container button:hover {
-            background-color: #218838;
-        }
-
-        .error-message {
-            color: red;
-        }
-    </style>
+    <title>Todo App</title>
+    <link rel="stylesheet" type="text/css" href="../css/form.css">
 </head>
+
+<jsp:include page="header.jsp"></jsp:include>
 <body>
 <div class="form-container">
     <h1>Edit TODO</h1>
@@ -90,7 +52,7 @@
                         String selected = (item.getId().equals(taskDto.getLabelDto().getId())) ? "selected" : "";
             %>
             <option
-                    value="<%= item.getId() %>" <%= selected %>><%= item.getName() %>
+                    value="<%= item.getId() %>" <%= selected %>><%= item.getTitle() %>
             </option>
             <%
                     } // end for
@@ -103,7 +65,7 @@
     <%
     } else {
     %>
-    <p> Task not found not found.</p>
+    <p> Task not found.</p>
     <%
         }
     %>
